@@ -1,11 +1,15 @@
 <template>
     <div>
         <li>
-            <h2>{{friend.name}}</h2>
+            <!-- <h2>{{name}} {{friendIsFavorite === '1' ? '(Favorite)':''}} </h2> -->
+            <!-- <h2>{{name}} {{friendIsFavorite ? '(Favorite)':''}} </h2> -->
+            <h2>{{name}} {{isFavorite ? '(Favorite)':''}} </h2>
             <button @click="toggleDetails()"> {{ detailsAreVisible ? 'Hide' : 'Show' }} Details</button>
+            <br /><br />
+            <button @click="toggleIsFavorite()"> Are you favorite? {{isFavorite === '1' ? 'Yes :)':'No :('}}</button>
             <ul v-if="detailsAreVisible">
-                <li><strong>Phone:</strong>{{friend.phone}}</li>
-                <li><strong>Email:</strong>{{friend.email}}</li>
+                <li><strong>Phone:</strong>{{phoneNumber}}</li>
+                <li><strong>Email:</strong>{{emailAddress}}</li>
             </ul>
         </li>
     </div>
@@ -13,21 +17,63 @@
 
 <script>
     export default {
+        props: {
+            'id': {
+                type: String,
+                required: true
+            },
+            'name': {
+                type: String,
+                required: true
+            },
+            'phoneNumber': {
+                type: String,
+                required: true
+            },
+            'emailAddress': {
+                type: String,
+                required: true
+            },
+            'isFavorite': {
+                type: Boolean,
+                required: false,
+                default: false
+            },
+            // 'isFavorite': {
+            //     type: String,
+            //     required: false,
+            //     default: '0', //may be a function(){}
+            //     validator: function(value){
+            //         return value === '1' || value === '0'; //In this way you can ensure only 0 and 1 can be passed through
+            //     }
+            // }
+        },
         data(){
             return {
+                // friend: {
+                //         id: 'joaquim',
+                //         name: 'Joaquim José',
+                //         phone: '0123 45678 90',
+                //         email: 'joaquim@mail.com'
+                // },
+                // friendIsFavorite: this.isFavorite,
                 detailsAreVisible: false,
-                friend: {
-                        id: 'joaquim',
-                        name: 'Joaquim José',
-                        phone: '0123 45678 90',
-                        email: 'joaquim@mail.com'
-                },
             };
         },
 
         methods:{
             toggleDetails(){
                 this.detailsAreVisible = !this.detailsAreVisible;
+            },
+            toggleIsFavorite(){
+                // return this.friendIsFavorite === '1'
+                // ? this.friendIsFavorite = '0'
+                // : this.friendIsFavorite = '1'
+
+                // this.friendIsFavorite = !this.friendIsFavorite
+
+                console.log('inside component', this.id)
+                this.$emit('toggle-favorite', this.id);
             }
         }
     };
