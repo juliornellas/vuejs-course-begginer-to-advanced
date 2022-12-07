@@ -8,8 +8,8 @@
             <br /><br />
             <button @click="toggleIsFavorite()"> Are you favorite? {{isFavorite === '1' ? 'Yes :)':'No :('}}</button>
             <ul v-if="detailsAreVisible">
-                <li><strong>Phone:</strong>{{phoneNumber}}</li>
-                <li><strong>Email:</strong>{{emailAddress}}</li>
+                <li><strong>Phone:</strong> {{phoneNumber}}</li>
+                <li><strong>Email:</strong> {{emailAddress}}</li>
             </ul>
         </li>
     </div>
@@ -48,6 +48,18 @@
             //     }
             // }
         },
+        emits:['toggle-favorite'],
+        // emits:{
+        //     'toggle-favorite': function(id){
+        //         // if(id){
+        //         //     return true;
+        //         // }else{
+        //         //     console.warn('Missing ID');
+        //         //     return false;
+        //         // }
+        //         return id || false;
+        //     }
+        // },
         data(){
             return {
                 // friend: {
@@ -72,7 +84,6 @@
 
                 // this.friendIsFavorite = !this.friendIsFavorite
 
-                console.log('inside component', this.id)
                 this.$emit('toggle-favorite', this.id);
             }
         }

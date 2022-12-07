@@ -3,6 +3,7 @@
         <header>
             <h1>My friends</h1>
         </header>
+        <New-Friend @add-new-friend="addNewFriend"></New-Friend>
         <ul>
             <Friend-Contact
             v-for="friend in friends"
@@ -52,6 +53,10 @@
             toggleFavoriteStatus(friendId){
                 const identifiedFriend = this.friends.find(friend => friend.id === friendId);
                 identifiedFriend.isFavorite = !identifiedFriend.isFavorite
+            },
+            addNewFriend(newFriend){
+                console.info('New Friend data', newFriend)
+                this.friends.push(newFriend)
             }
         }
         // components:{
