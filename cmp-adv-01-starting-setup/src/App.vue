@@ -15,13 +15,7 @@
     <!-- is attribute say which component has to be shown -->
     <!-- Keep-alive do not destroy the component when you switch between then -->
     <keep-alive>
-      <div  v-if="selectedComponent === 'Manage-Goals'">
-        <component :is="selectedComponent"></component>
-      </div>
-      <div v-else>
-        <component :is="selectedComponent"></component>
-      </div>
-
+      <component :is="selectedComponent"></component>
     </keep-alive>
 
   </div>
